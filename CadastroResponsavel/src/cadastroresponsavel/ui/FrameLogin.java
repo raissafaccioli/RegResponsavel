@@ -5,6 +5,7 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.controller.AlunoController;
 import javax.swing.*;
 /**
  *
@@ -47,6 +48,8 @@ public class FrameLogin extends javax.swing.JFrame {
         lbSistemaCadastro.setText("Sistema de Cadastro de Responsáveis");
 
         lbProntuario.setText("Prontuário:");
+
+        tfProntuario.setName(""); // NOI18N
 
         lbSenha.setText("Senha:");
 
@@ -126,7 +129,13 @@ public class FrameLogin extends javax.swing.JFrame {
         // e verificar se a senha fornecida coincide com a senha no banco
         // se coincidir, a variavel loginSenhaCorreta deve ter o valor true
         // senao, deve ter o valor false
-        boolean loginSenhaCorreta = true;
+        boolean loginSenhaCorreta;
+        
+        String prontuario = tfProntuario.getText();
+        char[] senha = tfSenha.getPassword();
+        
+        AlunoController ac = new AlunoController();
+        loginSenhaCorreta = ac.realizarLogin(prontuario, senha);
         
         if(loginSenhaCorreta) {
             JFrame aplicacao = new FrameCadastroResponsaveis();
