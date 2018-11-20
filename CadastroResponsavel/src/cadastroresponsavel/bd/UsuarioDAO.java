@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package cadastroresponsavel.bd;
 
 import cadastroresponsavel.model.Usuario;
@@ -12,10 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Set;
 
-/**
- *
- * @author Giovani
- */
 public class UsuarioDAO {
     private ConnectionFactory cf = new ConnectionFactory();
     private PreparedStatement stm = null;
