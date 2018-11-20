@@ -134,12 +134,13 @@ public class FrameLogin extends javax.swing.JFrame {
         
         String prontuario = tfProntuario.getText();
         char[] senha = tfSenha.getPassword();
+
+        Usuario user = new Usuario(prontuario, senha);
         
         UsuarioController uc = new UsuarioController();
-        loginSenhaCorreta = uc.realizarLogin(prontuario, senha);
+        loginSenhaCorreta = uc.realizarLogin(user);
         
-        if(loginSenhaCorreta != null) {
-            Usuario user = new Usuario(prontuario, loginSenhaCorreta);
+        if(loginSenhaCorreta != null){
             
             JFrame aplicacao = new FrameCadastroResponsaveis(user);
             aplicacao.setVisible(true);

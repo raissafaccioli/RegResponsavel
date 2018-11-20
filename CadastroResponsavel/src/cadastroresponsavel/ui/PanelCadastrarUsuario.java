@@ -152,18 +152,23 @@ public class PanelCadastrarUsuario extends javax.swing.JPanel {
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
        String nome, prontuario, senha, repsenha;
-        
+       
        nome = tfNome.getText();
        prontuario = tfProntuario.getText();
        senha = String.valueOf(tfSenha.getPassword());
        repsenha = String.valueOf(tfSenhaRepetir.getPassword());
        
        if(senha.compareTo(repsenha) == 0){
+           Usuario usuario = new Usuario(prontuario, nome, senha);
            UsuarioController uc = new UsuarioController();
             
-            uc.cadastrar(nome, prontuario, senha);
+            uc.cadastrar(usuario);
             
             JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!!");
+            tfNome.setText("");
+            tfProntuario.setText("");
+            tfSenha.setText("");
+            tfSenhaRepetir.setText("");
        }else{
            JOptionPane.showMessageDialog(null, "As senhas não são iguais!!");
        }

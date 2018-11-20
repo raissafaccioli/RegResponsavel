@@ -25,6 +25,11 @@ public class Usuario {
         this.nome = nome;
     }
 
+    public Usuario(String prontuario, char[] senha) {
+        this.prontuario = prontuario;
+        this.senha = String.valueOf(senha);
+    }
+
     public String getProntuario() {
         return prontuario;
     }

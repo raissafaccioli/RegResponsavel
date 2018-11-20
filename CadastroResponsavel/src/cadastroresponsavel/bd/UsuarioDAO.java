@@ -5,10 +5,12 @@
  */
 package cadastroresponsavel.bd;
 
+import cadastroresponsavel.model.Usuario;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Set;
 
 /**
  *
@@ -20,18 +22,19 @@ public class UsuarioDAO {
     private ResultSet rs = null;  
     private Connection con = null; 
     
-    public String realizarLogin(String prontuario, char[] senha) {
+    public String realizarLogin(Usuario u) {
          
         try {
            con = cf.obterConexao();
            stm = con.prepareStatement("SELECT nome FROM usuario WHERE prontuario = ? AND senha = ?;");
-           stm.setString(1, prontuario);
-           stm.setString(2, String.valueOf(senha));
+           stm.setString(1, u.getProntuario());
+           stm.setString(2, u.getSenha());
             
            ResultSet rs = stm.executeQuery();
             if(!rs.next()){   
                 return null;
             }else{
+                u.setNome(rs.getString("nome"));
                 return rs.getString("nome");
             }
         
@@ -40,14 +43,14 @@ public class UsuarioDAO {
         }
     }
 
-    public void cadastrar(String nome, String prontuario, String senha) {
+    public void cadastrar(Usuario u) {
         try {
             con = cf.obterConexao();
             stm = con.prepareStatement("INSERT INTO usuario(nome, prontuario, senha) VALUES (?, ?, ?)");
             
-            stm.setString(1, nome);
-            stm.setString(2, prontuario);
-            stm.setString(3, senha);
+            stm.setString(1, u.getNome());
+            stm.setString(2, u.getProntuario());
+            stm.setString(3, u.getSenha());
             
             stm.executeUpdate();
                         
@@ -55,5 +58,31 @@ public class UsuarioDAO {
             throw new RuntimeException("Exceção: " + ex);
             
         } 
+    }
+
+    public boolean alterarsenha(Usuario u, String novasenha) {
+        try {
+           con = cf.obterConexao();
+           stm = con.prepareStatement("SELECT nome FROM usuario WHERE prontuario = ? AND senha = ?;");
+           stm.setString(1, u.getProntuario());
+           stm.setString(2, u.getSenha());
+            
+           ResultSet rs = stm.executeQuery();
+            if(!rs.next()){   
+                return false;
+            }else{
+                    stm = con.prepareStatement("UPDATE usuario SET senha = ? WHERE prontuario = ? AND senha = ?");
+
+                    stm.setString(1, novasenha);
+                    stm.setString(2, u.getProntuario());
+                    stm.setString(3, u.getSenha());
+
+                    stm.executeUpdate();
+                    return true;
+            }
+        
+        } catch (SQLException ex) {
+            throw new RuntimeException("Exceção: " + ex);
+        }        
     }
 }

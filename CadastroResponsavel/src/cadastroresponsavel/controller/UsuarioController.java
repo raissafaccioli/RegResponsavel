@@ -6,6 +6,7 @@
 package cadastroresponsavel.controller;
 
 import cadastroresponsavel.bd.UsuarioDAO;
+import cadastroresponsavel.model.Usuario;
 
 /**
  *
@@ -15,12 +16,16 @@ public class UsuarioController {
 
     UsuarioDAO dao = new UsuarioDAO();
     
-    public String realizarLogin(String prontuario, char[] senha) {
-        return dao.realizarLogin(prontuario, senha);
+    public String realizarLogin(Usuario u) {
+        return dao.realizarLogin(u);
     }
 
-    public void cadastrar(String nome, String prontuario, String senha) {
-        dao.cadastrar(nome, prontuario, senha);
+    public void cadastrar(Usuario u) {
+        dao.cadastrar(u);
+    }
+
+    public boolean alterarsenha(Usuario u, String novasenha) {
+        return dao.alterarsenha(u, novasenha);
     }
     
 }

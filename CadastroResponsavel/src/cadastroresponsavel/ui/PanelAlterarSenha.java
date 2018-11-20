@@ -5,6 +5,7 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.controller.UsuarioController;
 import cadastroresponsavel.model.Usuario;
 import javax.swing.*;
 
@@ -168,7 +169,31 @@ public class PanelAlterarSenha extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-
+        String prontuario, nome; 
+        char[] senha, novasenha, repnovasenha;
+        
+        nome = tfNome.getText();
+        prontuario = tfProntuario.getText();
+        senha = tfSenha.getPassword();
+        novasenha = tfNovaSenha.getPassword();
+        repnovasenha = tfSenhaRepetir.getPassword();
+        
+        if(String.valueOf(novasenha).compareTo(String.valueOf(repnovasenha)) == 0){
+            Usuario usuario = new Usuario(prontuario, nome, String.valueOf(senha));
+            
+            UsuarioController uc = new UsuarioController();
+            if(uc.alterarsenha(usuario, String.valueOf(novasenha))){
+                JOptionPane.showMessageDialog(null, "Senha alterada com sucesso!!");
+            }else{
+                JOptionPane.showMessageDialog(null, "A senha não pôde ser alterada!! Verifique os dados inseridos, por favor.");
+                tfSenha.setText("");
+                tfNovaSenha.setText("");
+                tfSenhaRepetir.setText("");
+            }
+            
+        }else{
+            JOptionPane.showMessageDialog(null, "As senhas não são iguais!!");
+        }
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -176,7 +201,9 @@ public class PanelAlterarSenha extends javax.swing.JPanel {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        // TODO add your handling code here:
+        tfSenha.setText("");
+        tfNovaSenha.setText("");
+        tfSenhaRepetir.setText("");
     }//GEN-LAST:event_btLimparActionPerformed
 
 
