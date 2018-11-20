@@ -5,6 +5,8 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.controller.UsuarioController;
+import cadastroresponsavel.model.Usuario;
 import javax.swing.*;
 
 /**
@@ -17,6 +19,10 @@ public class PanelCadastrarUsuario extends javax.swing.JPanel {
      * Creates new form PanelCadastroUsuario
      */
     public PanelCadastrarUsuario() {
+        initComponents();
+    }
+
+    PanelCadastrarUsuario(String prontuario) {
         initComponents();
     }
 
@@ -145,7 +151,22 @@ public class PanelCadastrarUsuario extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-
+       String nome, prontuario, senha, repsenha;
+        
+       nome = tfNome.getText();
+       prontuario = tfProntuario.getText();
+       senha = String.valueOf(tfSenha.getPassword());
+       repsenha = String.valueOf(tfSenhaRepetir.getPassword());
+       
+       if(senha.compareTo(repsenha) == 0){
+           UsuarioController uc = new UsuarioController();
+            
+            uc.cadastrar(nome, prontuario, senha);
+            
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado com sucesso!!");
+       }else{
+           JOptionPane.showMessageDialog(null, "As senhas não são iguais!!");
+       }
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -153,7 +174,10 @@ public class PanelCadastrarUsuario extends javax.swing.JPanel {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        // TODO add your handling code here:
+        tfNome.setText("");
+        tfProntuario.setText("");
+        tfSenha.setText("");
+        tfSenhaRepetir.setText("");
     }//GEN-LAST:event_btLimparActionPerformed
 
 

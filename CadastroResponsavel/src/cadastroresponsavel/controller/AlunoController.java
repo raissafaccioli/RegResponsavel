@@ -15,12 +15,7 @@ public class AlunoController {
     
     private AlunoDAO dao = new AlunoDAO();
 
-    public AlunoController() {
-        
+    public AlunoController() {   
     }
-    
-    public boolean realizarLogin(String prontuario, char[] senha){
-        return dao.realizarLogin(prontuario, senha);
-    }    
     
 }

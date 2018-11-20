@@ -5,6 +5,7 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.model.Usuario;
 import javax.swing.*;
 
 /**
@@ -18,6 +19,12 @@ public class PanelAlterarSenha extends javax.swing.JPanel {
      */
     public PanelAlterarSenha() {
         initComponents();
+    }
+
+    PanelAlterarSenha(Usuario usuario) {
+        initComponents();
+        tfProntuario.setText(usuario.getProntuario());
+        tfNome.setText(usuario.getNome());
     }
 
     /**
