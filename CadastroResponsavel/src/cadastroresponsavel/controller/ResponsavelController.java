@@ -5,6 +5,7 @@
  */
 package cadastroresponsavel.controller;
 
+import cadastroresponsavel.bd.ResponsavelDAO;
 import cadastroresponsavel.model.Responsavel;
 
 /**
@@ -12,9 +13,11 @@ import cadastroresponsavel.model.Responsavel;
  * @author Giovani
  */
 public class ResponsavelController {
-
+    
+    private ResponsavelDAO rdao = new ResponsavelDAO();
+    
     public void registrar(Responsavel resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        rdao.inserir(resp);
     }
     
 }

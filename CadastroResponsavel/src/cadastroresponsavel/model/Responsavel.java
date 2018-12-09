@@ -5,6 +5,8 @@ public class Responsavel {
     private String nome;
     private String dataNascimento;
     private String telefone;
+    
+    private Aluno aluno;
 
     public String getNome() {
         return nome;
@@ -28,6 +30,13 @@ public class Responsavel {
 
     public void setTelefone(String telefone) {
         this.telefone = telefone;
+    }
+
+    public Aluno getAluno() {
+        return aluno;
+    }
+    public void setAluno(Aluno aluno) {
+        this.aluno = aluno;
     }
 
 }

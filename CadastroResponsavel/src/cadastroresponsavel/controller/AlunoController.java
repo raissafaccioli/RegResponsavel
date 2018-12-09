@@ -6,6 +6,7 @@
 package cadastroresponsavel.controller;
 
 import cadastroresponsavel.bd.AlunoDAO;
+import cadastroresponsavel.model.Aluno;
 
 /**
  *
@@ -16,6 +17,10 @@ public class AlunoController {
     private AlunoDAO dao = new AlunoDAO();
 
     public AlunoController() {   
+    }
+
+    public void cadastrarAluno(Aluno a) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }

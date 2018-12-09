@@ -59,7 +59,8 @@ public class Aluno {
     }
 
     public void adicionarResponsavel(Responsavel resp) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        getResponsaveis().add(resp);
+        resp.setAluno(this);
     }
     
 }

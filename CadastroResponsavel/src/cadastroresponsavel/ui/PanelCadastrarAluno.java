@@ -203,19 +203,10 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        String nome, prontuario, dtnasc, telefone;
         List<Responsavel> responsaveis;
         
-        nome = tfNome.getText();
-        prontuario = tfProntuario.getText();
-        dtnasc = tfDataNascimento.getText();
-        telefone = tfTelefone.getText();
+        configuraAluno(tfNome.getText(), tfProntuario.getText(), tfDataNascimento.getText(), tfTelefone.getText());
         responsaveis = a.getResponsaveis();
-        
-        a.setProntuario(prontuario);
-        a.setNome(nome);
-        a.setDataNascimento(dtnasc);
-        a.setTelefone(telefone);
         a.setResponsaveis(responsaveis);
         
         AlunoController ac = new AlunoController();
@@ -231,8 +222,13 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        JFrame frame = new FrameCadastrarResponsavel(a);
-        frame.setVisible(true);
+        if(tfNome.getText() == "" || tfTelefone.getText() == "" || tfDataNascimento.getText() == ""){
+            JOptionPane.showMessageDialog(null, "Você precisa inserir outras informações antes de cadastrar o resposnsável!");
+        }else{
+            configuraAluno(tfNome.getText(), tfProntuario.getText(), tfDataNascimento.getText(), tfTelefone.getText());
+            JFrame frame = new FrameCadastrarResponsavel(a);
+            frame.setVisible(true);
+        }
     }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -259,4 +255,11 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     private javax.swing.JTextField tfProntuario;
     private javax.swing.JFormattedTextField tfTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void configuraAluno(String nome, String prontuario, String dtnasc, String telefone) {
+        a.setProntuario(prontuario);
+        a.setNome(nome);
+        a.setDataNascimento(dtnasc);
+        a.setTelefone(telefone);
+    }
 }

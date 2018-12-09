@@ -1,23 +1,26 @@
 CREATE DATABASE cadastroresponsavel;
 USE cadastroresponsavel;
 
+
+CREATE TABLE aluno (
+	prontuario VARCHAR(15) NOT NULL,
+	senha VARCHAR(20) NOT NULL,
+	dataNascimento VARCHAR(10) NOT NULL,
+	telefone VARCHAR(20) NOT NULL,
+
+	PRIMARY KEY(prontuario)
+);
+
 CREATE TABLE responsavel (
 	id INT AUTO_INCREMENT NOT NULL,
 	nome VARCHAR(200) NOT NULL,
 	dataNascimento VARCHAR(15) NOT NULL,
 	telefone VARCHAR(20) NOT NULL,
+	prontuarioAluno VARCHAR(15) NOT NULL,
+	
 
+	FOREIGN KEY (prontuarioAluno) REFERENCES aluno(prontuario),
 	PRIMARY KEY(id)
-);
-
-CREATE TABLE aluno (
-	prontuario VARCHAR(15) NOT NULL,
-	idResponsavel INT NULL,
-	senha VARCHAR(20) NOT NULL,
-	dataNascimento VARCHAR(10) NOT NULL,
-	telefone VARCHAR(20) NOT NULL,
-	PRIMARY KEY(prontuario),
-	FOREIGN KEY (idResponsavel) REFERENCES responsavel(id)
 );
 
 CREATE TABLE usuario(
