@@ -5,6 +5,10 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.controller.AlunoController;
+import cadastroresponsavel.model.Aluno;
+import cadastroresponsavel.model.Responsavel;
+import java.util.List;
 import javax.swing.*;
 
 /**
@@ -16,8 +20,12 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     /**
      * Creates new form PanelCadastroUsuario
      */
+    
+    Aluno a;
+    
     public PanelCadastrarAluno() {
         initComponents();
+        a = new Aluno();
     }
 
     /**
@@ -195,7 +203,23 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
+        String nome, prontuario, dtnasc, telefone;
+        List<Responsavel> responsaveis;
         
+        nome = tfNome.getText();
+        prontuario = tfProntuario.getText();
+        dtnasc = tfDataNascimento.getText();
+        telefone = tfTelefone.getText();
+        responsaveis = a.getResponsaveis();
+        
+        a.setProntuario(prontuario);
+        a.setNome(nome);
+        a.setDataNascimento(dtnasc);
+        a.setTelefone(telefone);
+        a.setResponsaveis(responsaveis);
+        
+        AlunoController ac = new AlunoController();
+        ac.cadastrarAluno(a);
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -207,7 +231,7 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        JFrame frame = new FrameCadastrarResponsavel();
+        JFrame frame = new FrameCadastrarResponsavel(a);
         frame.setVisible(true);
     }//GEN-LAST:event_btAdicionarActionPerformed
 

@@ -1,10 +1,21 @@
 
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.controller.ResponsavelController;
+import cadastroresponsavel.model.Aluno;
+import cadastroresponsavel.model.Responsavel;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableModel;
+
 public class FrameCadastrarResponsavel extends javax.swing.JFrame {
+
+    private Aluno a;
+    private ResponsavelController rc = new ResponsavelController();
     
-    public FrameCadastrarResponsavel() {
+    public FrameCadastrarResponsavel(Aluno a) {
         initComponents();
+        this.a = a;
+
     }
 
     @SuppressWarnings("unchecked")
@@ -131,11 +142,28 @@ public class FrameCadastrarResponsavel extends javax.swing.JFrame {
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        
+        tfNome.setText("");
+        tfTelefone.setText("");
+        tfDataNascimento.setText("");
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btInserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btInserirActionPerformed
-
+        String nome, telefone, dtnasc;
+        
+        nome = tfNome.getText();
+        telefone = tfTelefone.getText();
+        dtnasc = tfDataNascimento.getText();
+        
+        Responsavel resp = new Responsavel();
+        resp.setNome(nome);
+        resp.setTelefone(telefone);
+        resp.setDataNascimento(dtnasc);
+        
+        a.adicionarResponsavel(resp);
+        rc.registrar(resp);
+        
+        JOptionPane.showMessageDialog(this, "Responsável registrado com sucesso!");
+        this.setVisible(false);
     }//GEN-LAST:event_btInserirActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

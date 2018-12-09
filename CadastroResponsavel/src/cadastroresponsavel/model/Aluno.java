@@ -1,11 +1,16 @@
 package cadastroresponsavel.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Aluno {
     
     private String prontuario;
+    private String nome;
     private String senha;
     private String dataNascimento;
     private String telefone;
+    private List<Responsavel> responsaveis = new ArrayList();;
 
     public String getProntuario() {
         return prontuario;
@@ -15,6 +20,13 @@ public class Aluno {
         this.prontuario = prontuario;
     }
 
+    public String getNome() {
+        return nome;
+    }
+    public void setNome(String nome) {
+        this.nome = nome;
+    }    
+    
     public String getSenha() {
         return senha;
     }
@@ -38,6 +50,16 @@ public class Aluno {
     public void setTelefone(String telefone) {
         this.telefone = telefone;
     }
-    
+
+    public List<Responsavel> getResponsaveis() {
+        return responsaveis;
+    }
+    public void setResponsaveis(List<Responsavel> responsaveis) {
+        this.responsaveis = responsaveis;
+    }
+
+    public void adicionarResponsavel(Responsavel resp) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
