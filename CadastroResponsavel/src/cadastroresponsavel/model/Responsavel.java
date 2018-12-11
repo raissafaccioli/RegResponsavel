@@ -1,6 +1,8 @@
 package cadastroresponsavel.model;
 
-public class Responsavel {
+import java.util.Observable;
+
+public class Responsavel{
     
     private String nome;
     private String dataNascimento;

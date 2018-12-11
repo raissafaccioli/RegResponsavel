@@ -4,7 +4,7 @@ USE cadastroresponsavel;
 
 CREATE TABLE aluno (
 	prontuario VARCHAR(15) NOT NULL,
-	senha VARCHAR(20) NOT NULL,
+	nome VARCHAR(200) NOT NULL,
 	dataNascimento VARCHAR(10) NOT NULL,
 	telefone VARCHAR(20) NOT NULL,
 

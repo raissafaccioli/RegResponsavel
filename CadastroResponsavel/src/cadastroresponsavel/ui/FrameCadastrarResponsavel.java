@@ -10,7 +10,6 @@ import javax.swing.table.TableModel;
 public class FrameCadastrarResponsavel extends javax.swing.JFrame {
 
     private Aluno a;
-    private ResponsavelController rc = new ResponsavelController();
     
     public FrameCadastrarResponsavel(Aluno a) {
         initComponents();
@@ -158,9 +157,9 @@ public class FrameCadastrarResponsavel extends javax.swing.JFrame {
         resp.setNome(nome);
         resp.setTelefone(telefone);
         resp.setDataNascimento(dtnasc);
+        resp.setAluno(a);
         
         a.adicionarResponsavel(resp);
-        rc.registrar(resp);
         
         JOptionPane.showMessageDialog(this, "Responsável registrado com sucesso!");
         this.setVisible(false);

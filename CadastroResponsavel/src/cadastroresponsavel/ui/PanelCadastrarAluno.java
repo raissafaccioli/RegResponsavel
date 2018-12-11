@@ -6,10 +6,12 @@
 package cadastroresponsavel.ui;
 
 import cadastroresponsavel.controller.AlunoController;
+import cadastroresponsavel.controller.ResponsavelController;
 import cadastroresponsavel.model.Aluno;
 import cadastroresponsavel.model.Responsavel;
 import java.util.List;
 import javax.swing.*;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -26,6 +28,9 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     public PanelCadastrarAluno() {
         initComponents();
         a = new Aluno();
+        
+        TableModel modeloTabela = new ResponsaveisTabelaModelo(a);
+        tbResponsaveis.setModel(modeloTabela);
     }
 
     /**
@@ -211,6 +216,11 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
         
         AlunoController ac = new AlunoController();
         ac.cadastrarAluno(a);
+        
+        ResponsavelController rc = new ResponsavelController();
+        for(int i = 0; i < responsaveis.size(); i++){
+            rc.registrar(responsaveis.get(i));
+        }
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
@@ -222,7 +232,7 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        if(tfNome.getText() == "" || tfTelefone.getText() == "" || tfDataNascimento.getText() == ""){
+        if(tfNome.getText().equals("") || tfTelefone.getText().equals("") || tfDataNascimento.getText().equals("")){
             JOptionPane.showMessageDialog(null, "Você precisa inserir outras informações antes de cadastrar o resposnsável!");
         }else{
             configuraAluno(tfNome.getText(), tfProntuario.getText(), tfDataNascimento.getText(), tfTelefone.getText());

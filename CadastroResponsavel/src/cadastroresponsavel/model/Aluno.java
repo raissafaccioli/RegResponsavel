@@ -2,12 +2,12 @@ package cadastroresponsavel.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Observable;
 
-public class Aluno {
+public class Aluno extends Observable{
     
     private String prontuario;
     private String nome;
-    private String senha;
     private String dataNascimento;
     private String telefone;
     private List<Responsavel> responsaveis = new ArrayList();;
@@ -26,14 +26,6 @@ public class Aluno {
     public void setNome(String nome) {
         this.nome = nome;
     }    
-    
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
-    }
 
     public String getDataNascimento() {
         return dataNascimento;
@@ -61,6 +53,8 @@ public class Aluno {
     public void adicionarResponsavel(Responsavel resp) {
         getResponsaveis().add(resp);
         resp.setAluno(this);
+        this.setChanged();
+        this.notifyObservers();
     }
     
 }

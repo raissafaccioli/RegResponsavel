@@ -20,7 +20,7 @@ public class AlunoController {
     }
 
     public void cadastrarAluno(Aluno a) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        dao.inserir(a);
     }
     
 }

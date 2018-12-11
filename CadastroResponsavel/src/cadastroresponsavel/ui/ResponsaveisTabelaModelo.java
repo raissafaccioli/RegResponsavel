@@ -5,21 +5,43 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.model.Aluno;
 import cadastroresponsavel.model.Responsavel;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Observable;
+import java.util.Observer;
 import javax.swing.table.AbstractTableModel;
 
 /**
  *
  * @author Giovani
  */
-public class ResponsaveisTabelaModelo extends AbstractTableModel{
+public class ResponsaveisTabelaModelo 
+        extends AbstractTableModel 
+        implements Observer{
     
     private List<Responsavel> responsaveis;
     private String[] colunas = {"Nome", "Telefone"};
 
-    public ResponsaveisTabelaModelo(List<Responsavel> responsaveis) {
-        this.responsaveis = responsaveis;
+//    public ResponsaveisTabelaModelo(List<Responsavel> responsaveis) {
+//        this.responsaveis = responsaveis;
+//        Iterator<Responsavel> i = this.responsaveis.iterator();
+//        
+//        while (i.hasNext()){
+//            Responsavel resp = i.next();
+//            resp.addObserver(this);
+//        }
+//    }
+
+    public ResponsaveisTabelaModelo(Aluno a) {
+        this.responsaveis = a.getResponsaveis();
+        Iterator<Responsavel> i = this.responsaveis.iterator();
+        
+        while (i.hasNext()){
+            Responsavel resp = i.next();
+            resp.addObserver(this);
+        }
     }
     
     @Override
@@ -30,6 +52,11 @@ public class ResponsaveisTabelaModelo extends AbstractTableModel{
     @Override
     public int getColumnCount() {
         return colunas.length;
+    }
+    
+    @Override
+    public String getColumnName(int columnIndex) {
+        return colunas[columnIndex];
     }
 
     @Override
@@ -43,6 +70,11 @@ public class ResponsaveisTabelaModelo extends AbstractTableModel{
             default:
                 return "dado inválido";
         }
+    }
+
+    @Override
+    public void update(Observable o, Object arg) {
+        this.fireTableDataChanged();
     }
     
 }
