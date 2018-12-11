@@ -5,17 +5,26 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.controller.AlunoController;
+import cadastroresponsavel.model.Aluno;
+import java.util.List;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Andre
  */
 public class PanelVisualizarAlunos extends javax.swing.JPanel {
 
+    private List<Aluno> alunos;
     /**
      * Creates new form PanelVisualizarAlunos
      */
     public PanelVisualizarAlunos() {
         initComponents();
+        AlunoController ac = new AlunoController();
+        alunos = ac.visualizarAlunos();
+        this.preencherTabela(alunos);
     }
 
     /**
@@ -194,7 +203,8 @@ public class PanelVisualizarAlunos extends javax.swing.JPanel {
     }//GEN-LAST:event_btOrdenarNomeActionPerformed
 
     private void btAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarAlunoActionPerformed
-
+        JPanel aa = new PanelAlterarAluno();
+        aa.setVisible(true);
     }//GEN-LAST:event_btAlterarAlunoActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
@@ -219,4 +229,9 @@ public class PanelVisualizarAlunos extends javax.swing.JPanel {
     private javax.swing.JTable tbAlunos;
     private javax.swing.JTextField tfProntuarioProcurar;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherTabela(List<Aluno> alunos) {
+        AlunosTabelaModelo modeloTabela = new AlunosTabelaModelo(alunos);
+        tbAlunos.setModel(modeloTabela);
+    }
 }

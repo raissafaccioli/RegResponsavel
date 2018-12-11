@@ -6,7 +6,6 @@
 package cadastroresponsavel.ui;
 
 import cadastroresponsavel.model.Aluno;
-import cadastroresponsavel.model.Responsavel;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
@@ -17,50 +16,50 @@ import javax.swing.table.AbstractTableModel;
  *
  * @author Giovani
  */
-public class ResponsaveisTabelaModelo 
-        extends AbstractTableModel 
-        implements Observer{
+public class AlunosTabelaModelo extends AbstractTableModel implements Observer{
     
-    private List<Responsavel> responsaveis;
-    private String[] colunas = {"Nome", "Telefone"};
+    private List<Aluno> listaAlunos;
+    private String[] colunas = {"Prontuário", "Nome", "Responsável"};
 
-    public ResponsaveisTabelaModelo(Aluno a) {
-        this.responsaveis = a.getResponsaveis();
-        a.addObserver(this);
+    public AlunosTabelaModelo(List<Aluno> a){
+        listaAlunos = a;
+        Iterator<Aluno> i = listaAlunos.iterator();
+        while(i.hasNext()){
+            Aluno aluno = i.next();
+            aluno.addObserver(this);
+        }
     }
     
     @Override
     public int getRowCount() {
-        return responsaveis.size();
+        return listaAlunos.size();
     }
 
     @Override
     public int getColumnCount() {
         return colunas.length;
     }
-    
-    @Override
-    public String getColumnName(int columnIndex) {
-        return colunas[columnIndex];
-    }
 
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Responsavel resp = responsaveis.get(rowIndex);
-        switch(columnIndex) {
+        Aluno aluno = listaAlunos.get(rowIndex);
+        switch(columnIndex){
             case 0:
-                return resp.getNome();
+                return aluno.getProntuario();
             case 1:
-                return resp.getTelefone();
+                return aluno.getNome();
+            case 2:
+                return aluno.getResponsaveis();
             default:
-                return "dado inválido";
+                return "Dado inválido";
         }
     }
-
-    public void removeRow(int row) {
-        responsaveis.remove(row);
-    }
     
+    @Override
+    public String getColumnName(int columnIndex){
+        return colunas[columnIndex];
+    }
+
     @Override
     public void update(Observable o, Object arg) {
         this.fireTableDataChanged();

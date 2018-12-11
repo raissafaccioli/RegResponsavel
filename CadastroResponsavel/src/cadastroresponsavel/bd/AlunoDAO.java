@@ -5,6 +5,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Set;
 
 public class AlunoDAO {
@@ -13,6 +15,7 @@ public class AlunoDAO {
     private PreparedStatement stm = null;
     private ResultSet rs = null;  
     private Connection con = null;
+    private ResponsavelDAO rsdao = new ResponsavelDAO();
 
     public void inserir(Aluno a){
         try{
@@ -25,6 +28,34 @@ public class AlunoDAO {
             stm.setString(4, a.getTelefone());
             
             stm.executeUpdate();
+        }catch(SQLException sqle){
+            throw new RuntimeException("Exceção: " + sqle);
+        }
+    }
+
+    public List<Aluno> recuperar() {
+        try{
+        
+            List a = new LinkedList();
+            
+            con = cf.obterConexao();
+            stm = con.prepareStatement("SELECT * FROM aluno");
+            rs = stm.executeQuery();
+            
+            while(rs.next()){
+                Aluno aluno = new Aluno();
+                
+                aluno.setProntuario(rs.getString("prontuario"));
+                aluno.setNome(rs.getString("nome"));
+                aluno.setDataNascimento(rs.getString("datanascimento"));
+                aluno.setTelefone(rs.getString("telefone"));
+                
+                List responsaveis = rsdao.obterResponsaveisAluno(aluno);
+                aluno.setResponsaveis(responsaveis);
+                a.add(aluno);
+            }
+            
+            return a;
         }catch(SQLException sqle){
             throw new RuntimeException("Exceção: " + sqle);
         }

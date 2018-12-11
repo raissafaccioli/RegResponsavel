@@ -9,6 +9,7 @@ import cadastroresponsavel.controller.AlunoController;
 import cadastroresponsavel.controller.ResponsavelController;
 import cadastroresponsavel.model.Aluno;
 import cadastroresponsavel.model.Responsavel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.table.TableModel;
@@ -24,13 +25,13 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
      */
     
     Aluno a;
+    TableModel modeloTabela;
+    List<Responsavel> responsaveis;
     
     public PanelCadastrarAluno() {
         initComponents();
         a = new Aluno();
-        
-        TableModel modeloTabela = new ResponsaveisTabelaModelo(a);
-        tbResponsaveis.setModel(modeloTabela);
+        preencherTabela(a);
     }
 
     /**
@@ -208,8 +209,7 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCadastrarActionPerformed
-        List<Responsavel> responsaveis;
-        
+       
         configuraAluno(tfNome.getText(), tfProntuario.getText(), tfDataNascimento.getText(), tfTelefone.getText());
         responsaveis = a.getResponsaveis();
         a.setResponsaveis(responsaveis);
@@ -221,14 +221,17 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
         for(int i = 0; i < responsaveis.size(); i++){
             rc.registrar(responsaveis.get(i));
         }
+        
+        limpaFormulario();
+        JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso!");
     }//GEN-LAST:event_btCadastrarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        // TODO add your handling code here:
+        this.setVisible(false);
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        // TODO add your handling code here:
+        limpaFormulario();
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
@@ -242,9 +245,17 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
     }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
-        // TODO add your handling code here:
+        int linha = tbResponsaveis.getSelectedRow();
+        responsaveis = a.getResponsaveis();
+        Responsavel rsp = responsaveis.get(linha);
+        responsaveis.remove(rsp);
+        preencherTabela(a);
     }//GEN-LAST:event_btRemoverActionPerformed
 
+    private void preencherTabela(Aluno a){
+        modeloTabela = new ResponsaveisTabelaModelo(a);
+        tbResponsaveis.setModel(modeloTabela);        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btAdicionar;
@@ -271,5 +282,17 @@ public class PanelCadastrarAluno extends javax.swing.JPanel {
         a.setNome(nome);
         a.setDataNascimento(dtnasc);
         a.setTelefone(telefone);
+    }
+    
+    private void limpaFormulario(){
+        tfNome.setText("");
+        tfProntuario.setText("");
+        tfDataNascimento.setText("");
+        tfTelefone.setText("");
+
+        configuraAluno(tfNome.getText(), tfProntuario.getText(), tfDataNascimento.getText(), tfTelefone.getText());
+        List<Responsavel> r = new ArrayList();
+        a.setResponsaveis(r);
+        preencherTabela(a);
     }
 }

@@ -7,6 +7,7 @@ package cadastroresponsavel.controller;
 
 import cadastroresponsavel.bd.AlunoDAO;
 import cadastroresponsavel.model.Aluno;
+import java.util.List;
 
 /**
  *
@@ -21,6 +22,10 @@ public class AlunoController {
 
     public void cadastrarAluno(Aluno a) {
         dao.inserir(a);
+    }
+
+    public List<Aluno> visualizarAlunos() {
+        return dao.recuperar();
     }
     
 }

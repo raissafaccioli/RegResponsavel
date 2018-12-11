@@ -2,7 +2,7 @@ package cadastroresponsavel.model;
 
 import java.util.Observable;
 
-public class Responsavel{
+public class Responsavel extends Observable{
     
     private String nome;
     private String dataNascimento;
