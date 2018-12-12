@@ -62,7 +62,7 @@ public class Aluno extends Observable{
         String nomes = new String();
         
         for(int i = 0; i < responsaveis.size(); i++){
-            nomes = responsaveis.get(i).getNome() + ", ";
+            nomes = nomes + "," + responsaveis.get(i).getNome();
         }
         
         return nomes;
