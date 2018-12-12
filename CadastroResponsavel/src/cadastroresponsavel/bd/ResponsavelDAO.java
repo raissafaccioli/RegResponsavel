@@ -86,4 +86,20 @@ public class ResponsavelDAO {
         }
     }
     
+    public void removerResponsavel(Responsavel r){
+        try{    
+            cf = new ConnectionFactory();
+            con = cf.obterConexao();
+            
+            sql = "DELETE FROM responsavel WHERE nome = ? AND prontuarioaluno = ?";
+            stm = con.prepareStatement(sql);
+            
+            stm.setString(1, r.getNome());
+            stm.setString(2, r.getAluno().getProntuario());
+            stm.executeUpdate();
+        }catch(SQLException sqle){
+            System.out.println("Exceção: " + sqle);
+        }        
+    }
+    
 }

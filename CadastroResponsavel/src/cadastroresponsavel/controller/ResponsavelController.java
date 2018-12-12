@@ -24,4 +24,8 @@ public class ResponsavelController {
         rdao.removerResponsaveisAluno(prontuario);
     }
     
+    public void removerResponsavel(Responsavel r){
+        rdao.removerResponsavel(r);
+    }
+    
 }

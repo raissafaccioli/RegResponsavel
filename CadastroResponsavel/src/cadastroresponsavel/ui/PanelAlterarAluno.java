@@ -5,7 +5,14 @@
  */
 package cadastroresponsavel.ui;
 
+import cadastroresponsavel.controller.AlunoController;
+import cadastroresponsavel.controller.ResponsavelController;
+import cadastroresponsavel.model.Aluno;
+import cadastroresponsavel.model.Responsavel;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -13,11 +20,26 @@ import javax.swing.*;
  */
 public class PanelAlterarAluno extends javax.swing.JPanel {
 
+    Aluno a;
+    List<Responsavel> responsaveis;
+    private JFrame fc;
+    
     /**
      * Creates new form PanelCadastroUsuario
      */
-    public PanelAlterarAluno() {
+    public PanelAlterarAluno(Aluno a, JFrame fc) {
         initComponents();
+        
+        this.a = a;
+        this.fc = fc;
+        
+        tfProntuario.setText(a.getProntuario());
+        tfNome.setText(a.getNome());
+        tfDataNascimento.setText(a.getDataNascimento());
+        tfTelefone.setText(a.getTelefone());
+        
+        responsaveis = a.getResponsaveis();
+        preencherTabela(a);
     }
 
     /**
@@ -197,24 +219,48 @@ public class PanelAlterarAluno extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarActionPerformed
-        // TODO add your handling code here:
+        a.setProntuario(tfProntuario.getText());
+        a.setNome(tfNome.getText());
+        a.setDataNascimento(tfDataNascimento.getText());
+        a.setTelefone(tfTelefone.getText());
+        
+        ResponsavelController rc = new ResponsavelController();
+        rc.removerResponsaveisAluno(a.getProntuario());
+        
+        for(int i = 0; i < responsaveis.size(); i++){
+            rc.registrar(responsaveis.get(i));
+        }
+        
+        AlunoController ac = new AlunoController();
+        ac.alterarAluno(a);
+        
+        JOptionPane.showMessageDialog(null, "Aluno alterado com sucesso!");
     }//GEN-LAST:event_btAlterarActionPerformed
 
     private void btCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCancelarActionPerformed
-        // TODO add your handling code here:
+        fc.dispose();
     }//GEN-LAST:event_btCancelarActionPerformed
 
     private void btLimparActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLimparActionPerformed
-        // TODO add your handling code here:
+        tfNome.setText("");
+        tfDataNascimento.setText("");
+        tfTelefone.setText("");
     }//GEN-LAST:event_btLimparActionPerformed
 
     private void btAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAdicionarActionPerformed
-        //JFrame frame = new FrameCadastrarResponsavel();
-        //frame.setVisible(true);
+        JFrame frame = new FrameCadastrarResponsavel(a);
+        frame.setVisible(true);
     }//GEN-LAST:event_btAdicionarActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed
-        // TODO add your handling code here:
+        int linha = tbResponsaveis.getSelectedRow();
+        responsaveis = a.getResponsaveis();
+        
+        Responsavel rsp = responsaveis.get(linha);
+        responsaveis.remove(rsp);
+        ResponsavelController rc = new ResponsavelController();
+        rc.removerResponsavel(rsp);
+        preencherTabela(a);
     }//GEN-LAST:event_btRemoverActionPerformed
 
 
@@ -237,4 +283,9 @@ public class PanelAlterarAluno extends javax.swing.JPanel {
     private javax.swing.JTextField tfProntuario;
     private javax.swing.JFormattedTextField tfTelefone;
     // End of variables declaration//GEN-END:variables
+
+    private void preencherTabela(Aluno a) {
+        TableModel modeloTabela = new ResponsaveisTabelaModelo(a);
+        tbResponsaveis.setModel(modeloTabela);
+    }
 }

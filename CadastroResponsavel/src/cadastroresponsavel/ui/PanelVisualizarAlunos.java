@@ -14,6 +14,7 @@ import cadastroresponsavel.model.ComparadorAlunosResponsavel;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -220,9 +221,18 @@ public class PanelVisualizarAlunos extends javax.swing.JPanel {
     }//GEN-LAST:event_btOrdenarNomeActionPerformed
 
     private void btAlterarAlunoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btAlterarAlunoActionPerformed
-        PanelAlterarAluno aa = new PanelAlterarAluno();
-        aa.setVisible(true);
-        this.setVisible(false);
+        int linha = tbAlunos.getSelectedRow();
+        if(linha >= 0){
+            Aluno a = alunos.get(linha);
+
+            JFrame fc = new JFrame();
+            PanelAlterarAluno panel = new PanelAlterarAluno(a, fc);
+            fc.add(panel);
+            fc.setVisible(true);
+            fc.setSize(panel.getPreferredSize());
+        }else{
+            JOptionPane.showMessageDialog(null, "Selecione um aluno para alterar!");
+        }
     }//GEN-LAST:event_btAlterarAlunoActionPerformed
 
     private void btRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btRemoverActionPerformed

@@ -31,5 +31,9 @@ public class AlunoController {
     public void remover(Aluno a) {
         dao.remover(a.getProntuario());
     }
+
+    public void alterarAluno(Aluno a) {
+        dao.alterar(a);
+    }
     
 }

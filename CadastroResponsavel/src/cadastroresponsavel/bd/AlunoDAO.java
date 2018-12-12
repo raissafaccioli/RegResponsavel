@@ -69,7 +69,21 @@ public class AlunoDAO {
             stm.executeUpdate();                     
         } catch (SQLException ex) {
             throw new RuntimeException("Exceção: " + ex);
-            
         }        
+    }
+
+    public void alterar(Aluno a) {
+        try {
+            con = cf.obterConexao();
+            stm = con.prepareStatement("UPDATE aluno SET nome = ?, datanascimento = ?, telefone = ? WHERE prontuario = ?");
+            stm.setString(1, a.getNome());
+            stm.setString(2, a.getDataNascimento());
+            stm.setString(3, a.getTelefone());
+            stm.setString(4, a.getProntuario());
+            
+            stm.executeUpdate();                     
+        } catch (SQLException ex) {
+            throw new RuntimeException("Exceção: " + ex);
+        }
     }
 }
