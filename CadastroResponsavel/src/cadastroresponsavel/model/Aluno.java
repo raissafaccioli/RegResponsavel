@@ -11,6 +11,7 @@ public class Aluno extends Observable{
     private String dataNascimento;
     private String telefone;
     private List<Responsavel> responsaveis = new ArrayList();;
+    private String listaNomeResponsaveis;
 
     public String getProntuario() {
         return prontuario;
@@ -57,4 +58,13 @@ public class Aluno extends Observable{
         this.notifyObservers();
     }
     
+    public String getListaNomeResposaveis() {
+        String nomes = new String();
+        
+        for(int i = 0; i < responsaveis.size(); i++){
+            nomes = responsaveis.get(i).getNome() + ", ";
+        }
+        
+        return nomes;
+    }
 }

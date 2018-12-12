@@ -29,8 +29,7 @@ public class RelatorioHelper {
             List<Aluno> alunos = ac.visualizarAlunos();
             HashMap<String, Object> params = new HashMap<>();
 
-            JRBeanCollectionDataSource dt = 
-                    new JRBeanCollectionDataSource(alunos);
+            JRBeanCollectionDataSource dt = new JRBeanCollectionDataSource(alunos);
             switch(tipo){
                 case 1: //Relatorio de alunos
                     in = this.getClass().getClassLoader().getResourceAsStream("relatorioAlunos.jrxml");

@@ -4,6 +4,9 @@
 	<queryString>
 		<![CDATA[]]>
 	</queryString>
+	<field name="prontuario" class="java.lang.String"/>
+	<field name="nome" class="java.lang.String"/>
+	<field name="listaNomeResponsaveis" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -45,18 +48,24 @@
 	</columnHeader>
 	<detail>
 		<band height="125" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="30" uuid="0fec617f-1ee9-43bd-8f7a-ca763391ef54"/>
-				<text><![CDATA[$F{prontuario}]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="110" y="0" width="100" height="30" uuid="05bcffc9-16ed-4d20-b4a4-ed36a22a174b"/>
-				<text><![CDATA[$F{nome}]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="220" y="0" width="100" height="30" uuid="a7d31a86-4685-40b3-b0a7-c938a63ca4e5"/>
-				<text><![CDATA[$F{getResponsaveis().getNome()}]]></text>
-			</staticText>
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="ad4e5269-4e3b-425f-a710-b3de7a8d26fd">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="fc445740-4f5f-4f15-b78e-208ff14d5e7a"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{prontuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="30" uuid="ecc811f1-cd51-4ebc-9a50-672de4bbc3ea">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="aba64254-5909-46c9-be1a-e4f0551a1f5b"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="100" height="30" uuid="4d25ec2e-6532-4be4-9250-196cb5b818c0">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="251016a7-2af9-4bd3-968b-9edb2895251c"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{listaNomeResponsaveis}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>

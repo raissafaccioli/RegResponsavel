@@ -49,7 +49,7 @@ public class AlunosTabelaModelo extends AbstractTableModel implements Observer{
             case 1:
                 return aluno.getNome();
             case 2:
-                return aluno.getResponsaveis();
+                return aluno.getListaNomeResposaveis();
             default:
                 return "Dado inválido";
         }

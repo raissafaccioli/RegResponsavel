@@ -7,14 +7,14 @@
 	<field name="prontuario" class="java.lang.String"/>
 	<field name="nome" class="java.lang.String"/>
 	<field name="dataNascimento" class="java.lang.String"/>
-	<field name="telefone" class=""/>
+	<field name="telefone" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="79" splitType="Stretch">
+		<band height="58" splitType="Stretch">
 			<staticText>
-				<reportElement x="60" y="10" width="421" height="69" uuid="b44fdcbc-310a-4b9c-aed5-c3cb967856c8"/>
+				<reportElement x="60" y="10" width="421" height="40" uuid="b44fdcbc-310a-4b9c-aed5-c3cb967856c8"/>
 				<textElement textAlignment="Center">
 					<font size="26"/>
 				</textElement>
@@ -46,7 +46,7 @@
 				<text><![CDATA[Data de Nascimento]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="330" y="0" width="100" height="30" uuid="ba97d0b0-5dd2-44a5-bfc6-d2a28da636f2">
+				<reportElement x="330" y="0" width="160" height="30" uuid="ba97d0b0-5dd2-44a5-bfc6-d2a28da636f2">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="40374d1b-e38e-4c2c-b198-cb4ed49ebab6"/>
 				</reportElement>
 				<text><![CDATA[Telefone]]></text>
@@ -54,23 +54,31 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="140" splitType="Stretch">
-			<staticText>
-				<reportElement x="0" y="0" width="100" height="30" uuid="8b9e035b-32e4-42e7-9a40-c97b30aae7d2"/>
-				<text><![CDATA[$F{prontuario}]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="110" y="0" width="100" height="30" uuid="376012ba-2fb0-42fa-b26f-df1415a679fe"/>
-				<text><![CDATA[$F{nome}]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="220" y="0" width="100" height="30" uuid="05fe4da4-e0a6-4d9d-af24-c011465172fa"/>
-				<text><![CDATA[$F{dataNascimento}]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="330" y="0" width="100" height="30" uuid="7c8a0a57-fd9a-4f8e-ba93-5c1f773bfb48"/>
-				<text><![CDATA[$F{telefone}]]></text>
-			</staticText>
+		<band height="55" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="100" height="30" uuid="9d54f8ae-937b-415a-90e0-090b828d9a67">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="f7c41e8e-00aa-4b6d-8dbe-86fbd2e5d231"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{prontuario}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="110" y="0" width="100" height="30" uuid="83f4354a-5347-411a-bda4-23f3f28727b7">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="825557d6-78cd-4b09-a34b-486d58455112"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="220" y="0" width="100" height="30" uuid="2b855464-10d0-4761-99bf-d068f1721fbc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c5779ae4-9a0a-425f-935c-7eaa710bc6d2"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{dataNascimento}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="330" y="0" width="160" height="30" uuid="49940b54-c126-4f77-902f-e8f24022454c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b45abab8-cf85-402e-889e-2a856f0ee3d2"/>
+				</reportElement>
+				<textFieldExpression><![CDATA[$F{telefone}]]></textFieldExpression>
+			</textField>
 		</band>
 	</detail>
 	<columnFooter>
