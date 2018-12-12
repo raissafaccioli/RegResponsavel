@@ -143,6 +143,7 @@ public class FrameCadastroResponsaveis extends javax.swing.JFrame {
 
     private void mnCadastrarNovoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarNovoActionPerformed
         JPanel panel = new PanelCadastrarAluno();
+        panel.setVisible(true);
         this.setContentPane(panel); 
         this.setSize(this.getPreferredSize());
     }//GEN-LAST:event_mnCadastrarNovoActionPerformed
@@ -153,6 +154,7 @@ public class FrameCadastroResponsaveis extends javax.swing.JFrame {
 
     private void mnCadastrarUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnCadastrarUsuarioActionPerformed
         JPanel panel = new PanelCadastrarUsuario();
+        panel.setVisible(true);
         this.setContentPane(panel); 
         this.setSize(this.getPreferredSize());
     }//GEN-LAST:event_mnCadastrarUsuarioActionPerformed
@@ -163,12 +165,14 @@ public class FrameCadastroResponsaveis extends javax.swing.JFrame {
 
     private void mnAlterarSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnAlterarSenhaActionPerformed
         JPanel panel = new PanelAlterarSenha(usuario);
+        panel.setVisible(true);
         this.setContentPane(panel); 
         this.setSize(this.getPreferredSize());
     }//GEN-LAST:event_mnAlterarSenhaActionPerformed
 
     private void mnVisualizarAlunosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnVisualizarAlunosActionPerformed
         JPanel panel = new PanelVisualizarAlunos();
+        panel.setVisible(true);
         this.setContentPane(panel); 
         this.setSize(this.getPreferredSize());
     }//GEN-LAST:event_mnVisualizarAlunosActionPerformed

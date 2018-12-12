@@ -5,6 +5,7 @@ import cadastroresponsavel.model.Responsavel;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,8 +47,10 @@ public class ResponsavelDAO {
             cf = new ConnectionFactory();
             con = cf.obterConexao();
             
-            sql = "SELECT * FROM responsaveis WHERE prontuarioaluno = ?";
+            sql = "SELECT * FROM responsavel WHERE prontuarioaluno = ?";
             stm = con.prepareStatement(sql);
+            
+            stm.setString(1, a.getProntuario());
             
             ResultSet rs = stm.executeQuery();
             while(rs.next()){
@@ -66,6 +69,21 @@ public class ResponsavelDAO {
             e.printStackTrace();
         }
         return responsaveis;
+    }
+
+    public void removerResponsaveisAluno(String prontuario) {
+        try{    
+            cf = new ConnectionFactory();
+            con = cf.obterConexao();
+            
+            sql = "DELETE FROM responsavel WHERE prontuarioaluno = ?";
+            stm = con.prepareStatement(sql);
+            
+            stm.setString(1, prontuario);
+            stm.executeUpdate();
+        }catch(SQLException sqle){
+            System.out.println("Exceção: " + sqle);
+        }
     }
     
 }

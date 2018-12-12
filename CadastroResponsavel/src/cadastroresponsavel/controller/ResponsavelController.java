@@ -19,5 +19,9 @@ public class ResponsavelController {
     public void registrar(Responsavel resp) {
         rdao.inserir(resp);
     }
+
+    public void removerResponsaveisAluno(String prontuario) {
+        rdao.removerResponsaveisAluno(prontuario);
+    }
     
 }

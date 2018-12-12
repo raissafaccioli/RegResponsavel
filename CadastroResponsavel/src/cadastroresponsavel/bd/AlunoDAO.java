@@ -60,4 +60,16 @@ public class AlunoDAO {
             throw new RuntimeException("Exceção: " + sqle);
         }
     }
+
+    public void remover(String prontuario) {
+        try {
+            con = cf.obterConexao();
+            stm = con.prepareStatement("DELETE FROM aluno WHERE prontuario = ?");
+            stm.setString(1, prontuario);
+            stm.executeUpdate();                     
+        } catch (SQLException ex) {
+            throw new RuntimeException("Exceção: " + ex);
+            
+        }        
+    }
 }

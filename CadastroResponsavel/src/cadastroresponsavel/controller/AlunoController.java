@@ -27,5 +27,9 @@ public class AlunoController {
     public List<Aluno> visualizarAlunos() {
         return dao.recuperar();
     }
+
+    public void remover(Aluno a) {
+        dao.remover(a.getProntuario());
+    }
     
 }
